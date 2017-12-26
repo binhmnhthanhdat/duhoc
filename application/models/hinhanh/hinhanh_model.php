@@ -11,9 +11,9 @@ if (!defined('BASEPATH'))
   # Create date: 26/04/2011
   ------------------------------------------------ */
 
-class Danhmucdichvu_model extends CI_Model {
+class hinhanh_model extends CI_Model {
 
-    var $table = 'camnhanhocvien';
+    var $table = 'hinhanh';
 
     function __construct() {
 
@@ -23,17 +23,11 @@ class Danhmucdichvu_model extends CI_Model {
     function add($data) {
 
         $this->db->set('name', $data['name']);
-        $this->db->set('ord', $data['ord']);
-        $this->db->set('title', $data['title']);
+        $this->db->set('url', $data['url']);
+        $this->db->set('img', $data['image']);
         $this->db->set('active', $data['active']);
-        $this->db->set('metakeyword', $data['metakeyword']);
-        $this->db->set('metadescription', $data['metadescription']);
-        $this->db->set('alias', $data['alias']);
-        $this->db->set('content', $data['content']);
-        // $this->db->set('thanhpho', $data['thanhpho']);
-        $this->db->set('images', $data['images']);
-        //content_detail
-        $this->db->set('content_detail', $data['content_detail']);
+        $this->db->set('ord', $data['ord']);
+
         if ($this->db->insert($this->table))
             return TRUE;
         else
@@ -43,17 +37,13 @@ class Danhmucdichvu_model extends CI_Model {
     function update($id, $data) {
 
         $this->db->where('id', $id);
+
         $this->db->set('name', $data['name']);
-        $this->db->set('ord', $data['ord']);
-        $this->db->set('title', $data['title']);
+        $this->db->set('url', $data['url']);
+        $this->db->set('img', $data['image']);
         $this->db->set('active', $data['active']);
-        $this->db->set('metakeyword', $data['metakeyword']);
-        $this->db->set('metadescription', $data['metadescription']);
-        $this->db->set('alias', $data['alias']);
-        $this->db->set('content', $data['content']);
-        // $this->db->set('thanhpho', $data['thanhpho']);
-        $this->db->set('images', $data['images']);
-        $this->db->set('content_detail', $data['content_detail']);
+        $this->db->set('ord', $data['ord']);
+
         if ($this->db->update($this->table))
             return TRUE;
         else
@@ -88,7 +78,7 @@ class Danhmucdichvu_model extends CI_Model {
             return FALSE;
     }
 
-    function get_danhmucdichvu_where($where = null, $order = null, $limit = null) {
+    function get_hinhanh_where($where = null, $order = null, $limit = null) {
 
         if ($where != null) {
             foreach ($where as $key => $val) {
@@ -127,14 +117,10 @@ class Danhmucdichvu_model extends CI_Model {
 
         $this->db->select('name');
         $q = $this->db->get_where($this->table, array('id' => $idparent));
-        if ($q->num_rows > 0) {
-            $result = $q->row();
 
-            return $result->name;
-        } else {
+        $result = $q->row();
 
-            return "---------";
-        }
+        return $result->name;
     }
 
     function get_all($root) {
@@ -173,13 +159,10 @@ class Danhmucdichvu_model extends CI_Model {
 
         $this->db->select('name');
         $q = $this->db->get_where($this->table, array('id' => $id));
-        if ($q->num_rows > 0) {
-            $result = $q->row();
 
-            return $result->name;
-        } else {
-            return "-------";
-        }
+        $result = $q->row();
+
+        return $result->name;
     }
 
     function get_name_alias($id) {

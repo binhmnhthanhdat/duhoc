@@ -62,42 +62,14 @@ $route['default_controller'] = "trangchu";
 			$route['admincp'] = "admin/user/login";
 			 $route['admin/user/(:any)'] = "admin/user/login";
 			 $route['admin/trangchu/home'] = "admin/home/index";
-			 //begin setting thanh cong tot dep
-			 //$route['admin/menu-ad/add_edit/(:any)'] = "admin/menu/add_edit/$1";
 			 $route['admin/setting-ad/add_edit'] = "admin/setting/add_edit";
 			 $route['admin/setting-ad/home'] = "admin/setting/index";
-			 //end setting  thanh cong tot dep
-			 //begin menu thanh cong tot dep
+			
 			 $route['admin/menu-ad/delete/(:any)'] = "admin/menu/delete/$1";
 			 $route['admin/menu-ad/add_edit/(:any)'] = "admin/menu/add_edit/$1";
 			 $route['admin/menu-ad/add_edit'] = "admin/menu/add_edit";
 			 $route['admin/menu-ad/home'] = "admin/menu/index";
-			 //end begin menu thanh cong tot dep
-			 //begin groupmenufooter thanh cong tot dep
-			 $route['admin/groupmenufooter-ad/delete/(:any)'] = "admin/groupmenufooter/delete/$1";
-			 $route['admin/groupmenufooter-ad/add_edit/(:any)'] = "admin/groupmenufooter/add_edit/$1";
-			 $route['admin/groupmenufooter-ad/add_edit'] = "admin/groupmenufooter/add_edit";
-			 $route['admin/groupmenufooter-ad/home'] = "admin/groupmenufooter/index";
-			 //end begingroupmenufootermenu thanh cong tot dep
-			 //begin menufooter-ad thanh cong tot dep
-			 $route['admin/menufooter-ad/delete/(:any)'] = "admin/menufooter/delete/$1";
-			 $route['admin/menufooter-ad/add_edit/(:any)'] = "admin/menufooter/add_edit/$1";
-			 $route['admin/menufooter-ad/add_edit'] = "admin/menufooter/add_edit";
-			 $route['admin/menufooter-ad/home'] = "admin/menufooter/index";
-			 //end menufooter-ad thanh cong tot dep
-			 //begin grouphoidap-ad thanh cong tot dep
-			 $route['admin/grouphoidap-ad/delete/(:any)'] = "admin/grouphoidap/delete/$1";
-			 $route['admin/grouphoidap-ad/add_edit/(:any)'] = "admin/grouphoidap/add_edit/$1";
-			 $route['admin/grouphoidap-ad/add_edit'] = "admin/grouphoidap/add_edit";
-			 $route['admin/grouphoidap-ad/home'] = "admin/grouphoidap/index";
-			 //end grouphoidap-ad thanh cong tot dep
-			 //begin listhoidap-ad thanh cong tot dep
-			 $route['admin/listhoidap-ad/delete/(:any)'] = "admin/listhoidap/delete/$1";
-			 $route['admin/listhoidap-ad/add_edit/(:any)'] = "admin/listhoidap/add_edit/$1";
-			 $route['admin/listhoidap-ad/add_edit'] = "admin/listhoidap/add_edit";
-			 $route['admin/listhoidap-ad/home'] = "admin/listhoidap/index";
-			 //end listhoidap-ad thanh cong tot dep
-			 //begin user-ad thanh cong tot dep
+
 			 $route['admin/user-ad/delete/(:any)'] = "admin/user/delete/$1";
 			 $route['admin/user-ad/add_edit/(:any)'] = "admin/user/add_edit/$1";
 			 $route['admin/user-ad/add_edit'] = "admin/user/add_edit";
@@ -115,13 +87,7 @@ $route['default_controller'] = "trangchu";
 			 $route['admin/duan-ad/add_edit'] = "admin/duan/add_edit";
 			 $route['admin/duan-ad/home'] = "admin/duan/index";
 			 //end duan-ad thanh cong tot dep
-			 //begin grouptin-ad thanh cong tot dep
-			 $route['admin/grouptin-ad/delete/(:any)'] = "admin/grouptin/delete/$1";
-			 $route['admin/grouptin-ad/add_edit/(:any)'] = "admin/grouptin/add_edit/$1";
-			 $route['admin/grouptin-ad/add_edit'] = "admin/grouptin/add_edit";
-			 $route['admin/grouptin-ad/home'] = "admin/grouptin/index";
-			 //end grouptin-ad thanh cong tot dep
-			  //begin tintuc-ad thanh cong tot dep
+			 
 			 $route['admin/tintuc-ad/delete/(:any)'] = "admin/tintuc/delete/$1";
 			 $route['admin/tintuc-ad/add_edit/(:any)'] = "admin/tintuc/add_edit/$1";
 			 $route['admin/tintuc-ad/add_edit'] = "admin/tintuc/add_edit";
@@ -129,12 +95,6 @@ $route['default_controller'] = "trangchu";
 			 $route['admin/tintuc-ad/home'] = "admin/tintuc/index";
 			 //end tintuc-ad thanh cong tot dep
 			 
-			  //begin tinhienthi-ad thanh cong tot dep
-			 $route['admin/tinhienthi-ad/delete/(:any)'] = "admin/tinhienthi/delete/$1";
-			 $route['admin/tinhienthi-ad/add_edit/(:any)'] = "admin/tinhienthi/add_edit/$1";
-			 $route['admin/tinhienthi-ad/add_edit'] = "admin/tinhienthi/add_edit";
-			 $route['admin/tinhienthi-ad/home'] = "admin/tinhienthi/index";
-			 //end tinhienthi-ad thanh cong tot dep
 			 
 			  //begin gioithieu-ad thanh cong tot dep
 			 $route['admin/listgioithieu-ad/delete/(:any)'] = "admin/listgioithieu/delete/$1";
@@ -148,7 +108,15 @@ $route['default_controller'] = "trangchu";
 			 $route['admin/slide-ad/add_edit'] = "admin/slide/add_edit";
 			 $route['admin/slide-ad/home'] = "admin/slide/index";
 			 //end slide-ad thanh cong tot dep
-			  
+			  $route['admin/hinhanh-ad/delete/(:any)'] = "admin/hinhanh/delete/$1";
+			 $route['admin/hinhanh-ad/add_edit/(:any)'] = "admin/hinhanh/add_edit/$1";
+			 $route['admin/hinhanh-ad/add_edit'] = "admin/hinhanh/add_edit";
+			 $route['admin/hinhanh-ad/home'] = "admin/hinhanh/index";
+                         
+                          $route['admin/video-ad/delete/(:any)'] = "admin/video/delete/$1";
+			 $route['admin/video-ad/add_edit/(:any)'] = "admin/video/add_edit/$1";
+			 $route['admin/video-ad/add_edit'] = "admin/video/add_edit";
+			 $route['admin/video-ad/home'] = "admin/video/index";
 			 //begin parttent-ad thanh cong tot dep
 			 $route['admin/parttent-ad/delete/(:any)'] = "admin/parttent/delete/$1";
 			 $route['admin/parttent-ad/add_edit/(:any)'] = "admin/parttent/add_edit/$1";

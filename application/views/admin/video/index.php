@@ -16,33 +16,38 @@
                 </div>
             </div><!--End heading-->
             <div class="content">
-            	<form id="form_list" method="post" action="<?=base_url();?>admin/danhmucdichvu-ad/home">
+            	<form id="form_list" method="post" action="<?=base_url();?>admin/hinhanh-ad/home">
                 <input type="hidden" id="act_del" name="act_del" value="act_del" />
                 	<table class="list">
                     	<thead>
                         	<tr>
                             	<td width="1" style="text-align:center;"><input type="checkbox" onclick="$('input[name*=\'selected\']').attr('checked', this.checked);" /></td>
-                                <td class="left"><a href="#">Tên học viên</a></td>
-                                <td class="left"><a href="#">Mô tả ngắn</a></td>
-                                <td class="left"><a href="#">Ảnh</a></td>
-                                 <td class="left"><a href="#">Vị trí</a></td>
-                                <td class="right"><a href="#">Trạng thái</a></td>
+                                <td class="left"><a href="#">Tên video</a></td>
+                                <td class="left"><a href="#">Đường dẫn</a></td>
+                                <td class="left"><a href="#">Thứ tự</a></td>
+                                 <td class="left"><a href="#">Trạng thái</a></td>
                                 <td class="right">Action</td>
                             </tr>
                         </thead>
+                        
                         <tbody>
                         	<?php if(!empty($lists)) : ?>
 							<?php foreach($lists as $user) : ?>
                             <tr>
-                                <td style="text-align:center"><input type="checkbox" name="selected[]" value="<?=$user['id'];?>" /></td>
-                                <td class="left"><?=$user['name'];?></td>
-                                <td class="left"><?=mb_substr($user['content'], 0,100)."...";?></td>
-                                 <td class="left">
-                                 <img src="<? echo base_url();?><?=$user['images'];?>" width="50" height="50" />
-                                 </td>
-                                  <td class="left"><?=$user['ord'];?></td>
-                                   <td class="left"><?if($user['active']==1) echo "Hiển thị"; else echo "Không hiển thị";?></td>
-                                <td class="right">
+                                 <td style="text-align:center;width:5%;"><input type="checkbox" name="selected[]" value="<?=$user['id'];?>" /></td>
+                                
+                                <td class="left" style="width: 10%;"><?=$user['name'];?></td>
+                                
+                                  <td class="left" style="width: 10%;"><?=$user['url'];?></td>
+                                   <td class="left" style="width: 10%;"><? echo $user['ord']; ?></td>
+                                 <td class="right" style="width: 10%;">
+                                	<?if($user['active']==1)
+                                		echo "Hiển thị";
+                                	else
+                                		echo "Không hiển thị";
+                                	?></td>
+                               
+                                <td class="right" style="width: 10%;">
                                     <a href="<?=$user['url_edit'];?>">Edit</a> :: <a href="<?=$user['url_del'];?>" title="Xóa User này" id="action_del_<?=$user['id'];?>" onclick="do_del(<?=$user['id'];?>); return false;">Delete</a>
                                 </td>
                             </tr>

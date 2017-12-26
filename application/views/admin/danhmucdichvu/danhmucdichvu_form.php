@@ -41,7 +41,7 @@
             </div><!--End heading-->
             <div class="content">
             	<div id="tabs" class="htabs">
-                	<a href="#tab_1" class="selected">Thông tin Danh mục</a>
+                	<a href="#tab_1" class="selected">Thông tin học viên</a>
                     <!--<a href="#tab_2">Tab 2</a>
                     <a href="#tab_3">Tab 3</a>-->
                 </div><!--End tabs-->
@@ -51,7 +51,7 @@
                    	  <table width="100%" class="form">
 						<tbody>
                            	  <tr>
-                                  <td width="169" align="left"><label>Tên danh mục:</label></td>
+                                  <td width="169" align="left"><label>Tên học viên:</label></td>
                                     <td width="922">
                                     	<?php if(@$article->name !='') :?>
                                         <input name="name" type="text" id="name" value="<?php echo @$article->name;?>" size="100" />
@@ -61,11 +61,8 @@
                                     	<?=form_error('name');?>
                                 	</td>
                                 </tr>
-                                
-                                
-                                  
                                 <tr>
-                                  <td width="169" align="left"><label>Tiêu đề :</label></td>
+                                  <td width="169" align="left"><label>Tiêu đề bài viết :</label></td>
                                     <td width="922">
                                     	<?php if(@$article->title !='') :?>
                                         <input name="title" type="text" id="title" value="<?php echo @$article->title;?>" size="100" />
@@ -77,7 +74,7 @@
                                 </tr>
                                 
                                 <tr>
-                                  <td width="169" align="left"><label>Hinh anh:</label></td>
+                                  <td width="169" align="left"><label>Hình ảnh:</label></td>
                                     <td width="922">
                                          <?    echo form_upload('userfile'); ?> <br>
                                         <?php if(@$article->images !='') : ?>
@@ -128,19 +125,22 @@
                                   <td width="169" align="left"><label>Mô tả:</label><br><span class="help">Phần này chỉ hiển thị ở trang chủ</span></td>
                                     <td width="922">
                                         <?php if(@$article->content !='') { 
-                                      
-                                            echo $this->ckeditor->editor("detail", @$article->content, $config_mini);
-                                        
-                                          } else { 
-                                            //echo $this->ckeditor->editor("content", "", $config_mini);
-                                            echo $this->ckeditor->editor("detail", "", $config_mini);
+                                      ?>
+                                        <textarea cols="100" rows="3" id="detail" name="detail">
+                                            <?php echo @$article->content;?>
+                                          </textarea>
+                                        <?php
+                                           } else { ?>
+                                             <textarea cols="100" rows="3" id="detail" name="detail">
+                                            
+                                          </textarea> <?
                                         } ?>
                                         <?=form_error('detail');?>
                                     </td>
                                 </tr>
 								
 								<tr>
-                                  <td width="169" align="left"><label>Mô tả chi tiết:</label><br><span class="help">Phần này chỉ hiển thị ở trang chi tiết dịch vụ</span></td>
+                                  <td width="169" align="left"><label>Mô tả chi tiết:</label><br><span class="help">Phần này chỉ hiển thị ở trang chi tiết </span></td>
                                     <td width="922">
                                         <?php if(@$article->content_detail !='') { 
                                       

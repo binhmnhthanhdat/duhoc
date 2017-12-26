@@ -5,14 +5,14 @@ if (!defined('BASEPATH'))
 
 /* -----------------------------------------------
   # Rao_vat version 1.0
-  # slide controller
+  # hinhanh controller
   # Extends CI_Controller
   # Author: Nguyen Duc Hung - http://tinagroup.net
   # Create date: 02/05/2011
   ------------------------------------------------ */
 require_once APPPATH . 'third_party/admin_controller' . EXT;
 
-class Slide extends Admin_controller {
+class Hinhanh extends Admin_controller {
 
     public function __construct() {
 
@@ -22,25 +22,20 @@ class Slide extends Admin_controller {
         $this->check_login();
 
         // Load model
-        $this->load->model('slide/slide_model', 'slide');
+        $this->load->model('hinhanh/hinhanh_model', 'hinhanh');
         $this->load->library('ckeditor', array('instanceName' => 'CKEDITOR1', 'basePath' => base_url() . "ckeditor/", 'outPut' => true));
     }
 
     public function index() {
 
         $data = array();
-        $data['render_path'] = array('Admin' => base_url() . 'admin/trangchu/home', 'Danh mục slide' => base_url() . 'admin/slide-ad/home');
-        $data['heading_title'] = 'Quản lý slide';
-        $data['url_create'] = base_url() . 'admin/slide-ad/add_edit';
-        $data['action'] = base_url() . 'admin/slide-ad/add_edit';
+        $data['render_path'] = array('Admin' => base_url() . 'admin/trangchu/home', 'Danh mục Hình ảnh' => base_url() . 'admin/hinhanh-ad/home');
+        $data['heading_title'] = 'Quản lý Hình ảnh';
+        $data['url_create'] = base_url() . 'admin/hinhanh-ad/add_edit';
+        $data['action'] = base_url() . 'admin/hinhanh-ad/add_edit';
 
         $del = $this->input->post('selected');
-
-        /* $page = $this->input->get('page') ? $this->input->get('page') : 1;
-          $active = (int)$this->input->get('active');
-          $show = (int)$this->input->get('show');
-          //print_r($delete);
-         */
+ 
         if ($this->input->post('act_del') == 'act_del') {
 
             if ($del) {
@@ -49,24 +44,24 @@ class Slide extends Admin_controller {
 
                     foreach ($del as $id) {
 
-                        if ($this->slide->delete($id)) {
+                        if ($this->hinhanh->delete($id)) {
                             $this->session->set_flashdata('warning', 'Xóa danh mục thành công');
                         } else {
                             $this->session->set_flashdata('warning', 'Có lỗi xảy ra rồi');
-                            redirect('admin/slide-ad/home');
+                            redirect('admin/hinhanh-ad/home');
                         }
                     } //End foreach
-                    redirect('admin/slide-ad/home');
+                    redirect('admin/hinhanh-ad/home');
                 } // End if
             } else {
                 $this->session->set_flashdata('warning', 'Cần chọn ít nhất 1 bản tin để xóa');
-                redirect('admin/slide-ad/home');
+                redirect('admin/hinhanh-ad/home');
             }
         }
 
 
 
-        $article = $this->slide->get_slide_where(null, array('id' => 'DESC'), null);
+        $article = $this->hinhanh->get_hinhanh_where(null, array('id' => 'DESC'), null);
         foreach ($article->result() as $result) {
             $data['lists'][] = array(
                 'id' => $result->id,
@@ -76,43 +71,34 @@ class Slide extends Admin_controller {
                 'url' => $result->url,
                 'ord' => $result->ord,
                 'active' => $result->active,
-                'url_edit' => base_url() . 'admin/slide-ad/add_edit/' . $result->id,
-                'url_del' => base_url() . 'admin/slide-ad/delete/' . $result->id
+                'url_edit' => base_url() . 'admin/hinhanh-ad/add_edit/' . $result->id,
+                'url_del' => base_url() . 'admin/hinhanh-ad/delete/' . $result->id
             );
         }
 
 
-        $this->render($this->load->view('admin/slide/index', $data, TRUE));
+        $this->render($this->load->view('admin/hinhanh/index', $data, TRUE));
     }
 
     public function add_edit() {
 
 
         $_id = $this->uri->segment(4);
-        $data['render_path'] = array('Admin' => base_url() . 'admin/trangchu/home', 'Danh sách slide' => base_url() . 'admin/slide-ad/home');
-        $data['heading_title'] = 'Tạo - Cập nhật slide';
-        $data['action'] = base_url() . 'admin/slide-ad/add_edit';
-
+        $data['render_path'] = array('Admin' => base_url() . 'admin/trangchu/home', 'Danh sách hinhanh' => base_url() . 'admin/hinhanh-ad/home');
+        $data['heading_title'] = 'Tạo - Cập nhật hinhanh';
+        $data['action'] = base_url() . 'admin/hinhanh-ad/add_edit';
         $this->form_validation->set_rules('name', 'Name', 'trim|required');
-
-
-        //$this->form_validation->set_rules('ord', 'Sap xep', 'trim|required');
-        //$this->form_validation->set_rules('', 'Name', 'trim|required');
-        //$this->form_validation->set_rules('show_home', 'Show home', '');
-
         $data['name'] = $this->input->post('name');
         $data['active'] = ($this->input->post('active') == 'on') ? 1 : 0;
         $data['ord'] = $this->input->post('ord');
         $data['url'] = $this->input->post('url');
-
-        $data['contents'] = $this->input->post('detail');
         $id = (int) $this->input->post('id');
         $oldImage = $this->input->post('oldImage');
         if ($this->form_validation->run() == TRUE) {
 
             $config = array(
                 'allowed_types' => 'jpg|jpeg|gif|png',
-                'upload_path' => realpath(APPPATH . '../images/slide'),
+                'upload_path' => realpath(APPPATH . '../images/hinhanh'),
                 'max_size' => 20000000
             );
             $this->load->library('upload', $config);
@@ -123,7 +109,7 @@ class Slide extends Admin_controller {
                 if ($oldImage != '') {
                     $this->deleteFile($oldImage);
                 }
-                $data['image'] = 'images/slide/' . $image_data['file_name'];
+                $data['image'] = 'images/hinhanh/' . $image_data['file_name'];
             } else {
                 if ($oldImage != '') {
                     $data['image'] = $oldImage;
@@ -133,30 +119,30 @@ class Slide extends Admin_controller {
             } // End upload file
             if ($id && $id != '') {
 
-                if ($this->slide->update($id, $data)) {
+                if ($this->hinhanh->update($id, $data)) {
                     $this->session->set_flashdata('warning', 'Cập nhật Danh mục thành công');
-                    redirect('admin/slide-ad/add_edit/' . $id);
+                    redirect('admin/hinhanh-ad/add_edit/' . $id);
                 } else {
                     $this->session->set_flashdata('warning', 'Có lỗi rồi');
-                    redirect('admin/slide-ad/add_edit');
+                    redirect('admin/hinhanh-ad/add_edit');
                 }
             } else {
 
-                if ($this->slide->add($data)) {
+                if ($this->hinhanh->add($data)) {
                     $this->session->set_flashdata('warning', 'Thêm mới Danh mục thành công');
-                    redirect('admin/slide-ad/home');
+                    redirect('admin/hinhanh-ad/home');
                 } else {
                     $this->session->set_flashdata('warning', 'Có lỗi rồi');
-                    redirect('admin/slide-ad/add_edit');
+                    redirect('admin/hinhanh-ad/add_edit');
                 }
             }
         }
 
         if ($_id != '')
-            $data['article'] = $this->slide->get_by_id($_id);
-        //$data['root'] = $this->slide->get_root_slide(0);
+            $data['article'] = $this->hinhanh->get_by_id($_id);
+        //$data['root'] = $this->hinhanh->get_root_hinhanh(0);
 
-        $this->render($this->load->view('admin/slide/slide_form', $data, TRUE));
+        $this->render($this->load->view('admin/hinhanh/hinhanh_form', $data, TRUE));
     }
 
     function delete() {
@@ -164,17 +150,17 @@ class Slide extends Admin_controller {
         //$this->permission_edit_del();
 
         $id = $this->uri->segment(4);
-        /* if($this->slide->parent_exists($id)) {
+        /* if($this->hinhanh->parent_exists($id)) {
           $this->session->set_flashdata('message', 'Bạn cần xóa danh mục con trước khi xóa!');
-          redirect('admin/slide');
+          redirect('admin/hinhanh');
           } else {
          */
-        if ($this->slide->delete($id)) {
+        if ($this->hinhanh->delete($id)) {
             $this->session->set_flashdata('warning', 'Xóa danh mục thành công!');
-            redirect('admin/slide-ad/home');
+            redirect('admin/hinhanh-ad/home');
         } else {
             $this->session->set_flashdata('warning', 'Xóa danh mục Thất bại!');
-            redirect('admin/slide-ad/home');
+            redirect('admin/hinhanh-ad/home');
         }
         //}
     }
@@ -182,4 +168,4 @@ class Slide extends Admin_controller {
 }
 
 /* End file */
-/* Local application/controllers/admin/slide.php */
+/* Local application/controllers/admin/hinhanh.php */
